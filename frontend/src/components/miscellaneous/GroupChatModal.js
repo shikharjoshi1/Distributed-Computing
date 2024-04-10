@@ -42,7 +42,7 @@ function GroupChatModal({ children }) {
         },
       };
       const { data } = await axios.get(
-        `http://localhost:5000/api/user?search=${search}`,
+        `http://localhost:3000/api/user?search=${search}`,
         config
       );
 //      console.log(data);

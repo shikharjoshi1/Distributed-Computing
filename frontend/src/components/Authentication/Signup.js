@@ -101,7 +101,7 @@ const Signup = () => {
           'Content-type': 'application/json'
         }
       };
-      const {data} = await axios.post('http://localhost:5000/api/user',
+      const {data} = await axios.post('http://localhost:3000/api/user',
       // const  res  = await axios.get('http://localhost:5000/api/chat');
       {name, email, password, pic}, config
       );
