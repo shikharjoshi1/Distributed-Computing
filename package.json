@@ -4,7 +4,8 @@
   "description": "A chat application for remote based employees",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
     "build":"npm install --prefix backend && npm install --force --prefix frontend && npm run build --prefix frontend"
     
   },

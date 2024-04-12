@@ -38,7 +38,7 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 const allUsers = expressAsyncHandler(async (req, res) => {
-  // api/user?search=piyush
+  // api/user?search=shikhar
   const keyword = req.query.search
     ? {
         $or: [
