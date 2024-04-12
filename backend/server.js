@@ -7,6 +7,7 @@ const connectDB = require("./config/database");
 const userRoutes = require("./routes/userRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes");
+const path = require('path');
 
 const app = express();
 dotenv.config();
@@ -19,14 +20,42 @@ const morgan = require("morgan");
 const { notFound, errorHandler } = require("./middlewares/errorHandling");
 // const connectDB = require("./config/database");
 app.use(morgan("dev"));
-
-app.get("/", (req, res) => {
-  res.send("API is running successfully");
-});
-
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/message", messageRoutes);
+
+
+//-------------------------Deployment-------------------------
+const _dirname = path.resolve();
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(_dirname,"../frontend/build")));
+  
+  app.get("/", (req,res)=>{
+    res.sendFile(path.resolve(_dirname,"frontend", "build", "index.html"))
+  })
+
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running successfully");
+  });
+  
+}
+// const _dirname = path.dirname("")
+// const buildPath = path.join(_dirname , "../client/build");
+
+// app.use(express.static(buildPath))
+
+// app.get("/", function(req,res){
+//   res.sendFile(
+//     path.join(_dirname, "../client/build/index.html"),
+//     function (err){
+//       if(err) {
+//         res.status(500).send(err);
+//       }
+//     }
+//   )
+// })
+//-------------------------Deployment-------------------------
 
 app.use(notFound);
 app.use(errorHandler);
@@ -34,7 +63,7 @@ const PORT = process.env.PORT || 5000;
 
 
 //Web socket initialization and function call
-const server = app.listen(PORT, console.log(`Server started on port ${PORT}`));
+const server = app.listen(PORT, console.log(`Server started on port ${PORT}`.yellow));
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
