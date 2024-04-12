@@ -5,12 +5,14 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "build":"npm install && npm install --force --prefix ../frontend"
+    "build":"npm install && npm install --force --prefix ../frontend && cd ../backend"
     
   },
   "author": "Group 9",
   "license": "ISC",
   "dependencies": {
+    
+    "mongoose": "^8.2.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
