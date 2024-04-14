@@ -67,7 +67,7 @@ const server = app.listen(PORT, console.log(`Server started on port ${PORT}`.yel
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "https://distributed-computing-rz8m.onrender.com/",
+    origin: "https://chat-sphere-webapp.netlify.app",
   },
 });
 
